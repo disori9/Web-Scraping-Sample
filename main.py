@@ -21,13 +21,18 @@ def store(data):
     with open("data.txt", "a") as file:
         file.write(data + "\n")
 
+def read_text(txt_file):
+    with open(txt_file, "r") as file:
+        data = file.readlines()
+        data = [info.strip("\n") for info in data]
+
+    return data
+
 if __name__ == "__main__":
     src = scrape(URL)
     value = extract(src)
 
-    with open("data.txt", "r") as file:
-        tours = file.readlines()
-        tours = [tour.strip("\n") for tour in tours]
+    tours = read_text("data.txt")
 
     if value != "No upcoming tours":
         if value not in tours:
