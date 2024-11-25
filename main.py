@@ -1,5 +1,6 @@
 import requests
 import selectorlib
+import time
 from send_email import send_email
 
 URL = "https://programmer100.pythonanywhere.com/tours/"
@@ -27,15 +28,15 @@ def read_text(txt_file):
     return data
 
 if __name__ == "__main__":
-    src = scrape(URL)
-    value = extract(src)
+     while True:
+        src = scrape(URL)
+        value = extract(src)
 
-    tours = read_text("data.txt")
+        tours = read_text("data.txt")
 
-    if value != "No upcoming tours":
-        if value not in tours:
-            send_email(value)
-            store(value)
-
-    print(tours)
-    print(value)
+        if value != "No upcoming tours":
+            if value not in tours:
+                send_email(value)
+                store(value)
+        print(value)
+        time.sleep(2)
