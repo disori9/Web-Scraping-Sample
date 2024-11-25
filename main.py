@@ -18,12 +18,8 @@ def send_email():
     print("Email was sent!")
 
 def store(data):
-    with open("data.txt", "r") as file:
-        extracted_data = file.readlines()
-
-    with open("data.txt", "w") as file:
-        extracted_data.append(data + "\n")
-        file.writelines(extracted_data)
+    with open("data.txt", "a") as file:
+        file.write(data + "\n")
 
 if __name__ == "__main__":
     src = scrape(URL)
