@@ -1,5 +1,6 @@
 import requests
 import selectorlib
+from send_email import send_email
 
 URL = "https://programmer100.pythonanywhere.com/tours/"
 
@@ -13,9 +14,6 @@ def extract(source):
     extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
     extracted_value = extractor.extract(source)["tours"]
     return extracted_value
-
-def send_email():
-    print("Email was sent!")
 
 def store(data):
     with open("data.txt", "a") as file:
@@ -36,7 +34,7 @@ if __name__ == "__main__":
 
     if value != "No upcoming tours":
         if value not in tours:
-            send_email()
+            send_email(value)
             store(value)
 
     print(tours)
